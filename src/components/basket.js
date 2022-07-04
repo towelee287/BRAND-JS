@@ -1,4 +1,3 @@
-
 const basket = {
     items: [],
     wrapper: null,
@@ -36,11 +35,12 @@ const basket = {
         })
     },
     add(item) {
-        //console.log('add ' + item.productName);
         let find = this.items.find(basketItem => basketItem.productId == item.productId);
 
         if (!find) {
-            this.items.push(Object.assign({}, item, { amount: 1 }));
+            this.items.push(Object.assign({}, item, {
+                amount: 1
+            }));
         } else {
             find.amount++;
         }
@@ -61,10 +61,10 @@ const basket = {
     _total() {
         let totalStr = '';
         let arr = [];
-		this.items.forEach((item) => {
-			arr.push((item.productPrice)*(item.amount));
+        this.items.forEach((item) => {
+            arr.push((item.productPrice) * (item.amount));
         })
-         let sum = arr.reduce((sum, current) => {
+        let sum = arr.reduce((sum, current) => {
             return sum + current;
         })
         console.log(sum)
@@ -73,13 +73,13 @@ const basket = {
 
 
         this.total.innerHTML = totalStr;
-        
+
     },
     _render() {
-        
+
         let htmlStr = '';
-				this.items.forEach((item) => {
-					htmlStr += `
+        this.items.forEach((item) => {
+            htmlStr += `
 					<div class="drop-cart__product">
                             <a href="product.html" class="drop-cart__product-link">
                                 <img src="${item.productImg}" alt="product" class="drop-cart__product-img">
@@ -101,10 +101,8 @@ const basket = {
                         <a href="#" data-id="${item.productId}"name="remove" class="drop-cart__product-close far fa-times-circle"></a>
                     </div>
 					`
-                });
-				this.container.innerHTML = htmlStr;
-            }
+        });
+        this.container.innerHTML = htmlStr;
+    }
 }
 basket.init();
-
-// TOTAL через метод массива reduce
